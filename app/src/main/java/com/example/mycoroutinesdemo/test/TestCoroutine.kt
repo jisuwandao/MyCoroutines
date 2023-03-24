@@ -7,9 +7,9 @@ class TestCoroutine {
     suspend fun main() {
         println("before")
 
-        suspendCoroutine<Unit> { continuation ->
+        /*suspendCoroutine<Unit> { continuation ->
             continuation.resumeWith(Result<Unit>)
-        }
+        }*/
 
         println("after")
     }

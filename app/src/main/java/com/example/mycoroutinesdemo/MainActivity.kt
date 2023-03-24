@@ -10,8 +10,10 @@ import com.example.mycoroutinesdemo.acts.MainActivity03
 import com.example.mycoroutinesdemo.acts.MainActivity04
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.coroutineContext
 
-class MainActivity : AppCompatActivity(), CoroutineScope {
+//class MainActivity : AppCompatActivity(), CoroutineScope {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,13 +42,22 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
         //GlobalScope.launch {  }
 
-        val corouScope = CoroutineScope(coroutineContext)
-        corouScope.launch {  }
+        //val corouScope = CoroutineScope(coroutineContext)
+        //corouScope.launch {  }
+
+        /*CoroutineScope(coroutineContext).launch {
+
+        }*/
+
+        val mainScoroutine = MainScope()
+        mainScoroutine.launch {  }
     }
 
-    override val coroutineContext: CoroutineContext
-        // get() = TODO("Not yet implemented")
-        get() = coroutineContext + Job()
+//    override val coroutineContext: CoroutineContext
+//        // get() = TODO("Not yet implemented")
+//        get() = coroutineContext + Job()
+
+
 }
 
 
