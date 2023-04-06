@@ -29,7 +29,7 @@ private fun requestLoadUser(responseCallback: ResponseCallback) {
                 if (isLoadSuccess) {
                     responseCallback.responseSuccess("加载到[用户数据]信息集")
                 } else {
-                    responseCallback.responseFail("加载[用户数据],加载失败,服务器宕机了")
+                    responseCallback.responseFail("加载[用户数据],加载失败")
                 }
             } catch (e: InterruptedException) {
                 e.printStackTrace()
@@ -55,7 +55,34 @@ private fun requestLoadUserAssets(responseCallback: ResponseCallback) {
                 if (isLoadSuccess) {
                     responseCallback.responseSuccess("加载到[用户资产数据]信息集")
                 } else {
-                    responseCallback.responseFail("加载[用户资产数据],加载失败,服务器宕机了")
+                    responseCallback.responseFail("加载[用户资产数据],加载失败")
+                }
+
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+        }
+    }.start()
+}
+
+/**
+ * 请求加载[用户资产详情数据]
+ * @param responseCallback 请求加载[用户资产详情数据]后 回调给外界的接口
+ */
+private fun requestLoadUserAssetsDetails(responseCallback: ResponseCallback) {
+    val isLoadSuccess = true // 加载成功，和，加载失败，的标记
+
+    // 开启异步线程，去请求加载服务器的数据集
+    object:Thread() {
+        override fun run() {
+            super.run()
+            try {
+                sleep(3000L) // 模拟请求服务器 所造成的耗时
+
+                if (isLoadSuccess) {
+                    responseCallback.responseSuccess("加载到[用户资产详情数据]信息集")
+                } else {
+                    responseCallback.responseFail("加载[用户资产详情数据],加载失败,服务器宕机了")
                 }
 
             } catch (e: InterruptedException) {
@@ -112,6 +139,8 @@ class MainActivity03 : AppCompatActivity() {
                                         //更新UI
                                         tvContent.text = responseData
                                         tvContent.setTextColor(Color.RED)
+
+                                        //还有第三个接口，省略了
 
                                         mProgressDialog?.dismiss()
                                     }

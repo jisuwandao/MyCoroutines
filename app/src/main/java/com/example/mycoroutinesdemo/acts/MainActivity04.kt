@@ -25,7 +25,7 @@ private suspend fun requestLoadUser() : String {
     if (isLoadSuccess) {
         return "加载到[用户数据]信息集"
     } else {
-        return "加载[用户数据],加载失败,服务器宕机了"
+        return "加载[用户数据],加载失败"
     }
 }
 
@@ -42,7 +42,25 @@ private suspend fun requestLoadUserAssets(): String {
     if (isLoadSuccess) {
         return "加载到[用户资产数据]信息集"
     } else {
-        return "加载[用户资产数据],加载失败,服务器宕机了"
+        return "加载[用户资产数据],加载失败"
+    }
+}
+
+/**
+ * 请求加载[用户资产详情数据]
+ */
+private suspend fun requestLoadUserAssetsDetails() : String {
+    val isLoadSuccess = true // 加载成功，和，加载失败，的标记
+
+    // 开启异步线程，去请求加载服务器的数据集
+    withContext(Dispatchers.IO) {
+        delay(3000L) // 模拟请求服务器 所造成的耗时
+    }
+
+    if (isLoadSuccess) {
+        return "加载到[用户资产详情数据]信息集"
+    } else {
+        return "加载[用户资产详情数据],加载失败,服务器宕机了"
     }
 }
 
@@ -85,6 +103,11 @@ class MainActivity04 : AppCompatActivity() {
             val responseResult2 = requestLoadUserAssets()
             tvContent.text = responseResult2
             tvContent.setTextColor(Color.RED)
+
+            // 第三步接口
+            val responseResult3 = requestLoadUserAssets()
+            tvContent.text = responseResult3
+            tvContent.setTextColor(Color.BLUE)
 
             mProgressDialog?.dismiss()
         }
